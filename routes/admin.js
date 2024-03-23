@@ -61,7 +61,7 @@ client.on('connect', () => {
     console.log('Connected to MQTT broker');
     const publishOptions = {
         qos: 0,
-        retain: false,
+        retain: true,
         dup: false,
     };
     const subscribeOptions = {
