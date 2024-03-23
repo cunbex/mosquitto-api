@@ -4,4 +4,3 @@ node_modules/
 .prettierrc.json
 package-lock.json
 .env
-prisma/
