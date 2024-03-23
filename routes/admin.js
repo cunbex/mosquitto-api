@@ -20,9 +20,9 @@ const options = {
     clientId: process.env.CLIENT_ID,
     protocolId: 'MQTT',
     protocolVersion: 4,
-    keepalive: 120,
-    reconnectPeriod: 10 * 1000,
-    connectTimeout: 12 * 1000,
+    keepalive: 60,
+    reconnectPeriod: 5 * 1000,
+    connectTimeout: 6 * 1000,
     username: process.env.BROKER_USERNAME,
     password: process.env.BROKER_PASSWORD,
     clean: false,
@@ -60,7 +60,7 @@ client.on('error', (err) => {
 client.on('connect', () => {
     console.log('Connected to MQTT broker');
     const publishOptions = {
-        qos: 0,
+        qos: 1,
         retain: true,
         dup: false,
     };
