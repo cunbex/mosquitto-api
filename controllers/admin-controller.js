@@ -70,10 +70,10 @@ exports.post_client = asyncHandler(async (req, res, next) => {
                 clientid: req.body.clientid || '',
                 textname: req.body.textname || '',
                 textdescription: req.body.textdescription || '',
-                groups: req.body.groups || '' /* [
+                groups: req.body.groups || [] /* [
                     { "groupname": "group", "priority": 1 }
                 ] */,
-                roles: req.body.roles || '' /* [
+                roles: req.body.roles || [] /* [
                     { "rolename": "role", "priority": -1 }
                 ] */,
             },
@@ -269,10 +269,10 @@ exports.put_client = asyncHandler(async (req, res, next) => {
                     req.body.clientid || '' /* Client ID will be removed */,
                 textname: req.body.textname || '',
                 textdescription: req.body.textdescription || '',
-                groups: req.body.groups || '' /* [
+                groups: req.body.groups || [] /* [
                     { "groupname": "group", "priority": 1 }
                 ] */,
-                roles: req.body.roles || '' /* [
+                roles: req.body.roles || [] /* [
                     { "rolename": "role", "priority": 1 }
                 ] */,
             },
@@ -453,7 +453,7 @@ exports.post_group = asyncHandler(async (req, res, next) => {
                 groupname: req.body.groupname,
                 roles:
                     req.body.roles ||
-                    '' /* [{ rolename: 'role', priority: -1 }] */,
+                    [] /* [{ rolename: 'role', priority: -1 }] */,
             },
         ],
     });
@@ -516,10 +516,10 @@ exports.put_group = asyncHandler(async (req, res, next) => {
                 textdescription: req.body.textdescription || '',
                 roles:
                     req.body.groups ||
-                    '' /* [{ rolename: 'role', priority: -1 }] */,
+                    [] /* [{ rolename: 'role', priority: -1 }] */,
                 clients:
                     req.body.groups ||
-                    '' /* [{ username: 'client', priority: -1 }] */,
+                    [] /* [{ username: 'client', priority: -1 }] */,
             },
         ],
     });
@@ -669,7 +669,7 @@ exports.post_role = asyncHandler(async (req, res, next) => {
                 rolename: req.body.rolename,
                 textname: req.body.textname,
                 textdescription: req.body.textdescription || '',
-                acls: req.body.acls || '' /* [
+                acls: req.body.acls || [] /* [
                     {
                         acltype: 'subscribePattern',
                         topic: 'topic/#',
@@ -739,7 +739,7 @@ exports.put_role = asyncHandler(async (req, res, next) => {
                 rolename: req.body.rolename,
                 textname: req.body.textname || '',
                 textdescription: req.body.textdescription || '',
-                acls: req.body.acls || '' /* [
+                acls: req.body.acls || [] /* [
                         { "acltype": "subscribePattern", "topic": "topic/#", "priority": -1, "allow": true }
                     ] */,
             },
