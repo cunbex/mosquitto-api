@@ -68,7 +68,7 @@ client.on('connect', () => {
         qos: 0,
     };
     client.subscribe(
-        process.env.CONTROL_TOPIC,
+        [process.env.CONTROL_TOPIC, 'disconnect'],
         subscribeOptions,
         (err, granted) => {
             if (err) {
