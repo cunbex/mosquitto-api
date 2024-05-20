@@ -29,11 +29,22 @@ model User {
 }
 
 model Controller {
-  id        String   @id @unique
-  active    Boolean  @default(false)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now())
+  id        String    @id @unique
+  active    Boolean   @default(false)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @default(now())
   topics    String
   userId    String?
-  User      User?    @relation(fields: [userId], references: [id])
+  password  Int       @default(0)
+  User      User?     @relation(fields: [userId], references: [id])
+  Devices   Devices[]
+}
+
+model Devices {
+  uuid         String      @id @unique
+  name         String
+  controllerId String?
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @default(now())
+  Controller   Controller? @relation(fields: [controllerId], references: [id])
 }
