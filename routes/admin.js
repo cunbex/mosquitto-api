@@ -27,7 +27,7 @@ const options = {
     password: process.env.BROKER_PASSWORD,
     clean: false,
     will: {
-        topic: `disconnect/${process.env.CLIENT_ID}`,
+        topic: `${process.env.CLIENT_ID}/lwt`,
         payload: `${process.env.CLIENT_ID} disconnected without a reason`,
         qos: 0,
         retain: false,
@@ -68,7 +68,7 @@ client.on('connect', () => {
         qos: 0,
     };
     client.subscribe(
-        [process.env.CONTROL_TOPIC, 'disconnect/#'],
+        [process.env.CONTROL_TOPIC, `${process.env.CLIENT_ID}/lwt`],
         subscribeOptions,
         (err, granted) => {
             if (err) {

@@ -35,6 +35,7 @@ exports.post_controller = asyncHandler(async (req, res, next) => {
                 JSON.stringify(req.body.topics) ||
                 JSON.stringify({ topics: [] }),
             userId: req.body.userId,
+            password: req.body.password,
         },
     });
     res.status(201).json({
