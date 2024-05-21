@@ -17,6 +17,6 @@ router.post('/group/update/record', adminController.put_group);
 router.post('/group/update/record', adminController.put_role);
 
 // Controller PUT endpoints
-router.post('/controller/update/topic', deviceController.put_controller_topic);
+router.post('/controller/update/topic', deviceController.put_controller_userId);
 
 module.exports = router;
