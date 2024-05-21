@@ -41,10 +41,11 @@ model Controller {
 }
 
 model Devices {
-  uuid         String      @id @unique
-  name         String
-  controllerId String?
-  createdAt    DateTime    @default(now())
-  updatedAt    DateTime    @default(now())
-  Controller   Controller? @relation(fields: [controllerId], references: [id])
+  uuid               String      @id @unique
+  controllerId       String?
+  createdAt          DateTime    @default(now())
+  updatedAt          DateTime    @default(now())
+  CharacteristicName String      @default("")
+  deviceName         String      @default("")
+  Controller         Controller? @relation(fields: [controllerId], references: [id])
 }
