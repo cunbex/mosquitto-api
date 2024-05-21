@@ -2,12 +2,15 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const createError = require('http-errors');
-
+const cors = require('cors');
 const adminRouter = require('./routes/admin');
 const controllerRouter = require('./routes/controller');
 const errorHandler = require('./middleware/errorHandler');
 
 const app = express();
+
+// Use CORS
+app.use(cors());
 
 app.use(logger('dev'));
 app.use(express.json());
