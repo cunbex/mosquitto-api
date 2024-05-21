@@ -2,6 +2,7 @@ const express = require('express');
 
 const adminController = require('../controllers/admin-controller.js');
 const deviceController = require('../controllers/device-controller.js');
+const checkControllerId = require('../middleware/checkControllerId.js');
 
 const router = express.Router();
 
@@ -19,6 +20,7 @@ router.post('/group/update/record', adminController.put_role);
 // Controller PUT endpoints
 router.post(
     '/controller/update/userId',
+    checkControllerId,
     deviceController.put_controller_userId,
 );
 
