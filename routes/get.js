@@ -12,6 +12,5 @@ router.get('/role/get/all', adminController.get_role_list);
 
 // Controller POST endpoints
 router.get('/controller/get/all', deviceController.get_controller_list);
-router.get('/controller/get/record', deviceController.get_controller_by_id);
 
 module.exports = router;
