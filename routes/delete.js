@@ -2,6 +2,7 @@ const express = require('express');
 
 const adminController = require('../controllers/admin-controller.js');
 const deviceController = require('../controllers/device-controller.js');
+const checkControllerId = require('../middleware/checkControllerId.js');
 
 const router = express.Router();
 
@@ -19,7 +20,11 @@ router.post('/role/delete/record', adminController.delete_role);
 router.post('/role/delete/acl', adminController.delete_role_acl);
 
 // Controller DELETE endpoints
-router.post('/controller/delete/record', deviceController.delete_controller);
+router.post(
+    '/controller/delete/record',
+    checkControllerId,
+    deviceController.delete_controller,
+);
 router.post(
     '/controller/delete/topic',
     deviceController.delete_controller_topic,

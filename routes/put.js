@@ -23,5 +23,5 @@ router.post(
     checkControllerId,
     deviceController.put_controller_userId,
 );
-
+router.post('/controller/update/topic', deviceController.put_controller_topic);
 module.exports = router;

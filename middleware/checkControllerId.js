@@ -2,13 +2,12 @@ const asyncHandler = require('express-async-handler');
 // checkID middleware
 
 const checkControllerId = asyncHandler(async (req, res, next) => {
-    const { controllerId } = req.body;
-    if (!controllerId) {
+    if (!req.body.id) {
         return next({ statusCode: 400, message: 'no controller id provided' });
     }
     const result = await req.prisma.controller.findUnique({
         where: {
-            id: controllerId,
+            id: req.body.id,
         },
     });
     if (!result) {
