@@ -32,7 +32,7 @@ model Controller {
   id        String    @id @unique
   active    Boolean   @default(false)
   createdAt DateTime  @default(now())
-  updatedAt DateTime  @default(now())
+  updatedAt DateTime
   topics    String
   userId    String?
   password  String    @default("0000")
@@ -44,7 +44,7 @@ model Devices {
   uuid               String      @id @unique
   controllerId       String?
   createdAt          DateTime    @default(now())
-  updatedAt          DateTime    @default(now())
+  updatedAt          DateTime
   CharacteristicName String      @default("")
   deviceName         String      @default("")
   Controller         Controller? @relation(fields: [controllerId], references: [id])
