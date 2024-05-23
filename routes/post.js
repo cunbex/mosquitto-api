@@ -23,10 +23,7 @@ router.post('/role/add/record', adminController.post_role);
 router.post('/role/add/acl', adminController.post_acl_role);
 
 // Controller POST endpoints
-router.post(
-    '/controller/get/record',
-    deviceController.get_controller_by_userId,
-);
+router.post('/controller/get/record', deviceController.get_controller_by_id);
 router.post('/controller/post/record', deviceController.post_controller);
 
 module.exports = router;

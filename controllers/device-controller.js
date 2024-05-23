@@ -7,18 +7,15 @@ exports.get_controller_list = asyncHandler(async (req, res, next) => {
     res.status(200).json({ success: true, status: 200, allControllers });
 });
 
-// GET Controller by userId
-exports.get_controller_by_userId = asyncHandler(async (req, res, next) => {
+// GET Controller by id
+exports.get_controller_by_id = asyncHandler(async (req, res, next) => {
     const result = await req.prisma.controller.findUnique({
         where: {
-            userId: req.body.id,
+            id: req.body.id,
         },
     });
     if (!result) {
-        return next({
-            statusCode: 404,
-            message: `No controller associated with this ID`,
-        });
+        return next({ statusCode: 404, message: `Controller doesn't exists` });
     }
     res.status(201).json({
         success: true,
