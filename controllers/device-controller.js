@@ -27,16 +27,22 @@ exports.get_controller_by_id = asyncHandler(async (req, res, next) => {
 // POST Controller
 exports.post_controller = asyncHandler(async (req, res, next) => {
     const deviceId = uuidv4();
+    const controllerData = {
+        id: deviceId,
+        active: req.body.active || false,
+        topics:
+            JSON.stringify(req.body.topics) || JSON.stringify({ topics: [] }),
+        password: req.body.password,
+    };
+    if (req.body.userId) {
+        controllerData.user = {
+            connect: {
+                id: req.body.userId,
+            },
+        };
+    }
     await req.prisma.controller.create({
-        data: {
-            id: deviceId,
-            active: req.body.active || false,
-            topics:
-                JSON.stringify(req.body.topics) ||
-                JSON.stringify({ topics: [] }),
-            userId: req.body.userId,
-            password: req.body.password,
-        },
+        data: controllerData,
     });
     res.status(201).json({
         success: true,
