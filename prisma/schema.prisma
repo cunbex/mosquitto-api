@@ -35,7 +35,7 @@ model Controller {
   updatedAt DateTime  @default(now())
   topics    String
   userId    String?
-  password  Int       @default(0)
+  password  String    @default("0000")
   User      User?     @relation(fields: [userId], references: [id])
   Devices   Devices[]
 }
