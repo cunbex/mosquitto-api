@@ -27,14 +27,6 @@ exports.get_controller_by_id = asyncHandler(async (req, res, next) => {
 // POST Controller
 exports.post_controller = asyncHandler(async (req, res, next) => {
     const deviceId = uuidv4();
-    await req.prisma.controller.create({
-        data: {
-            id: deviceId,
-            active: req.body.active || false,
-            topics: JSON.stringify(req.body.topics || []),
-            password: req.body.password,
-        },
-    });
     let payload = JSON.stringify({
         commands: [
             {
@@ -54,7 +46,7 @@ exports.post_controller = asyncHandler(async (req, res, next) => {
         req.publishOptions,
         (err) => {
             if (err) {
-                next(err);
+                return next(err);
             }
         },
     );
@@ -72,7 +64,7 @@ exports.post_controller = asyncHandler(async (req, res, next) => {
         req.publishOptions,
         (err) => {
             if (err) {
-                next(err);
+                return next(err);
             }
         },
     );
@@ -118,7 +110,7 @@ exports.post_controller = asyncHandler(async (req, res, next) => {
         req.publishOptions,
         (err) => {
             if (err) {
-                next(err);
+                return next(err);
             }
         },
     );
@@ -138,10 +130,18 @@ exports.post_controller = asyncHandler(async (req, res, next) => {
         req.publishOptions,
         (err) => {
             if (err) {
-                next(err);
+                return next(err);
             }
         },
     );
+    await req.prisma.controller.create({
+        data: {
+            id: deviceId,
+            active: req.body.active || false,
+            topics: JSON.stringify(req.body.topics || []),
+            password: req.body.password,
+        },
+    });
     res.status(201).json({
         success: true,
         status: 201,
