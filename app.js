@@ -70,7 +70,7 @@ const options = {
         topic: `${process.env.CLIENT_ID}/lwt`,
         payload: `${process.env.CLIENT_ID} disconnected without a reason`,
         qos: 0,
-        retain: false,
+        retain: true,
     },
     ca,
 };
@@ -80,6 +80,11 @@ const brokerUrl = process.env.BROKER_URL;
 
 // Create MQTT client instance
 const client = mqtt.connect(brokerUrl, options);
+
+// Event handlers
+client.on('connect', () => {
+    console.log('Connected to MQTT broker');
+});
 
 client.on('reconnect', () => {
     console.log('Reconnecting...');
@@ -94,11 +99,6 @@ client.on('close', () => {
 
 client.on('error', (err) => {
     console.error('MQTT client error:', err);
-});
-
-// Event handlers
-client.on('connect', () => {
-    console.log('Connected to MQTT broker');
 });
 
 client.subscribe(

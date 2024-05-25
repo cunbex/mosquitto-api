@@ -667,7 +667,7 @@ exports.post_role = asyncHandler(async (req, res, next) => {
             {
                 command: 'createRole',
                 rolename: req.body.rolename,
-                textname: req.body.textname,
+                textname: req.body.textname || '',
                 textdescription: req.body.textdescription || '',
                 acls: req.body.acls || [] /* [
                     {
