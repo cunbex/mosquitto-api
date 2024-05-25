@@ -60,7 +60,7 @@ const options = {
         topic: `${process.env.CLIENT_ID}/lwt`,
         payload: `${process.env.CLIENT_ID} disconnected without a reason`,
         qos: 0,
-        retain: true,
+        retain: false,
     },
     ca,
 };
