@@ -50,7 +50,7 @@ const options = {
     clientId: process.env.CLIENT_ID,
     protocolId: 'MQTT',
     protocolVersion: 4,
-    keepalive: 60,
+    keepalive: 3600,
     reconnectPeriod: 5 * 1000,
     connectTimeout: 6 * 1000,
     username: process.env.BROKER_USERNAME,
