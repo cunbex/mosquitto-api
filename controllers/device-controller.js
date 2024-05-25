@@ -185,16 +185,16 @@ exports.put_controller_userId = asyncHandler(async (req, res, next) => {
     if (!result) {
         return next({ statusCode: 404, message: `Controller doesn't exists` });
     }
-    await req.prisma.controller.update({
-        where: {
-            id: req.body.id,
-        },
-        data: {
-            userId: req.body.userId,
-        },
-    });
     let payload;
     if (req.body.state === 'add') {
+        await req.prisma.controller.update({
+            where: {
+                id: req.body.id,
+            },
+            data: {
+                userId: req.body.userId,
+            },
+        });
         payload = JSON.stringify({
             commands: [
                 {
@@ -206,6 +206,14 @@ exports.put_controller_userId = asyncHandler(async (req, res, next) => {
             ],
         });
     } else {
+        await req.prisma.controller.update({
+            where: {
+                id: req.body.id,
+            },
+            data: {
+                userId: null,
+            },
+        });
         payload = JSON.stringify({
             commands: [
                 {
