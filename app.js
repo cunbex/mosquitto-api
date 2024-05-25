@@ -45,14 +45,6 @@ app.use((req, res, next) => {
     next();
 });
 
-// Middleware to attach mqtt-Client PublishOptions and subscribeOptions to the request object
-app.use((req, res, next) => {
-    req.client = client;
-    req.publishOptions = publishOptions;
-    req.subscribeOptions = subscribeOptions;
-    next();
-});
-
 app.use('/api', [getRoutes, deleteRoutes, postRoutes, putRoutes]);
 
 // MQTT broker connection options
@@ -80,6 +72,14 @@ const brokerUrl = process.env.BROKER_URL;
 
 // Create MQTT client instance
 const client = mqtt.connect(brokerUrl, options);
+
+// Middleware to attach mqtt-Client PublishOptions and subscribeOptions to the request object
+app.use((req, res, next) => {
+    req.client = client;
+    req.publishOptions = publishOptions;
+    req.subscribeOptions = subscribeOptions;
+    next();
+});
 
 // Event handlers
 client.on('connect', () => {
