@@ -45,8 +45,6 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use('/api', [getRoutes, deleteRoutes, postRoutes, putRoutes]);
-
 // MQTT broker connection options
 const options = {
     clientId: process.env.CLIENT_ID,
@@ -80,6 +78,8 @@ app.use((req, res, next) => {
     req.subscribeOptions = subscribeOptions;
     next();
 });
+
+app.use('/api', [getRoutes, deleteRoutes, postRoutes, putRoutes]);
 
 // Event handlers
 client.on('connect', () => {
