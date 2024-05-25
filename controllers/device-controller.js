@@ -32,7 +32,7 @@ exports.post_controller = asyncHandler(async (req, res, next) => {
             {
                 command: 'createClient',
                 username: deviceId,
-                password: req.body.password,
+                password: '0000',
                 clientid: deviceId,
                 textname: req.body.textname || '',
                 textdescription: req.body.textdescription || '',
