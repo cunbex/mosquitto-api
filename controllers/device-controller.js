@@ -193,6 +193,26 @@ exports.put_controller_userId = asyncHandler(async (req, res, next) => {
             userId: req.body.userId,
         },
     });
+    const payload = JSON.stringify({
+        commands: [
+            {
+                command: 'addClientRole',
+                username: req.body.userId,
+                rolename: req.body.id,
+                priority: 0,
+            },
+        ],
+    });
+    req.client.publish(
+        '$CONTROL/dynamic-security/v1',
+        payload,
+        req.publishOptions,
+        (err) => {
+            if (err) {
+                next(err);
+            }
+        },
+    );
     res.status(200).json({
         success: true,
         status: 200,
