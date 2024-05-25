@@ -193,16 +193,30 @@ exports.put_controller_userId = asyncHandler(async (req, res, next) => {
             userId: req.body.userId,
         },
     });
-    const payload = JSON.stringify({
-        commands: [
-            {
-                command: 'addClientRole',
-                username: req.body.userId,
-                rolename: req.body.id,
-                priority: 0,
-            },
-        ],
-    });
+    let payload;
+    if (req.body.state === 'add') {
+        payload = JSON.stringify({
+            commands: [
+                {
+                    command: 'addClientRole',
+                    username: req.body.userId,
+                    rolename: req.body.id,
+                    priority: 0,
+                },
+            ],
+        });
+    } else {
+        payload = JSON.stringify({
+            commands: [
+                {
+                    command: 'removeClientRole',
+                    username: req.body.userId,
+                    rolename: req.body.id,
+                },
+            ],
+        });
+    }
+
     req.client.publish(
         '$CONTROL/dynamic-security/v1',
         payload,
@@ -216,7 +230,7 @@ exports.put_controller_userId = asyncHandler(async (req, res, next) => {
     res.status(200).json({
         success: true,
         status: 200,
-        message: `Updated userId, id: ${req.body.id}`,
+        message: `Updated userId & ${req.body.state} its controller role, id: ${req.body.id}`,
     });
 });
 
