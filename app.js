@@ -27,7 +27,7 @@ const publishOptions = {
     dup: false,
 };
 const subscribeOptions = {
-    qos: 0,
+    qos: 1,
 };
 
 require('dotenv').config();
